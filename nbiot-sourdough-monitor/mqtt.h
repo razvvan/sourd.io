@@ -111,11 +111,13 @@ bool mqtt_connect() {
     }
   }
 
+#ifdef MQTT_SUBSCRIBE_TO_STATE
   MqttClient::Error::type rc = mqtt->subscribe(MQTT_STATE_TOPIC, MqttClient::QOS0, device_state_callback);
   if (rc != MqttClient::Error::SUCCESS) {
     LOG(L_WARN, "Failed to subscribe to \"state\" topic: %i\r\n", rc);
     return false;
   }
+#endif
 
   return true;
 }

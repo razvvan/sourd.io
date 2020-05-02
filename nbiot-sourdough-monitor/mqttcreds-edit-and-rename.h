@@ -17,6 +17,9 @@
 // Or do your own thing! Set up custom creds below and uncomment this next line to do something custom:
     #define CUSTOM_MQTT
 
+// Subscribe to state topic if you would like to be able to send messages to the device
+    #define MQTT_SUBSCRIBE_TO_STATE
+
 /***-- CUSTOM BROKER --***/
 #if defined(CUSTOM_MQTT)
 
