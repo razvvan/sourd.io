@@ -15,7 +15,6 @@ void configure_tls();
 void fail();
 
 void modem_setup() {
-  
   // Feel free to change the log verbosity. E.g. from most critical to most verbose:
   //   - errors: L_ALERT, L_CRIT, L_ERR, L_ISSUE
   //   - warnings: L_WARN, L_NOTICE

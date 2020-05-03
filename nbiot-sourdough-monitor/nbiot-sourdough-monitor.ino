@@ -6,7 +6,7 @@
 
 // Tell it to include the important stuff from this sketch
 #include "config.h"
-#include "mqttcreds.h"
+#include "sourdio-config.h"
 #include "modem.h"
 #include "mqtt.h"
 
@@ -29,9 +29,6 @@ DHT dht(SENSOR_PIN, DHTTYPE);
 #define ULTRASONIC_PIN 38
 Ultrasonic UltrasonicRanger(ULTRASONIC_PIN);
 
-// we will send it every 20 second or so
-#define SEND_INTERVAL (20 * 1000)
-
 
 /**** Code to run once, when the device boots up ****/
 
@@ -52,7 +49,7 @@ void setup() {
   LOG(L_WARN, "Powering on bread sensors....\r\n");
   dht.begin();
   pinMode(ULTRASONIC_PIN, INPUT);
-  
+
   return;
 }
 
@@ -83,7 +80,7 @@ void bread_monitor_loop() {
   if (!sleep && ((last_send == 0) || (millis() - last_send >= SEND_INTERVAL))) {
     float temperature = dht.readTemperature();
     float humidity    = dht.readHumidity();
-    long distance     = UltrasonicRanger.MeasureInCentimeters();
+    long distance     = JAR_HEIGHT - UltrasonicRanger.MeasureInCentimeters();
     last_send = millis();
 
     #if defined(CUSTOM_MQTT)
@@ -92,6 +89,8 @@ void bread_monitor_loop() {
     char commandText[512];
     // edit the below text to fit your broker's needs!
     snprintf(commandText, 512, "{\"device\":\"%.*s\",\"humidity\":%4.2f,\"temp\":%4.2f,\"distance\":%ld}", imei.len, imei.s, humidity,temperature, distance);
+
+    LOG(L_INFO, "{\"device\":\"%.*s\",\"humidity\":%4.2f,\"temp\":%4.2f,\"distance\":%ld}", imei.len, imei.s, humidity,temperature, distance);
     if (!send_data(commandText)) {
       LOG(L_WARN, "Error publishing message: (client connected status: %d)\r\n", mqtt->isConnected());
     }

@@ -1,4 +1,4 @@
-// Make a copy of this file and call it mqttcreds.h 
+// Make a copy of this file and call it sourdio-config.h 
 // Make sure it is in the same directory as your .ino
 
 // This file tells your .ino which broker to publish to, and how to communicate with it
@@ -18,7 +18,11 @@
     #define CUSTOM_MQTT
 
 // Subscribe to state topic if you would like to be able to send messages to the device
-    #define MQTT_SUBSCRIBE_TO_STATE
+#define MQTT_SUBSCRIBE_TO_STATE
+
+// Arduino loop interval
+#define LOOP_INTERVAL 200
+
 
 /***-- CUSTOM BROKER --***/
 #if defined(CUSTOM_MQTT)

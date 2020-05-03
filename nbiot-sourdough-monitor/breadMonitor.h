@@ -15,8 +15,6 @@
 // Ultrasonic will be on D38 Grove port
 #define ULTRASONIC_PIN 38
 
-// we will send it every 20 seconds or so (this is probably high)
-#define SEND_INTERVAL (20 * 1000)
 
 // END CONFIGURATION SECTION
 

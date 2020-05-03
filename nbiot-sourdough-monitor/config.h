@@ -14,9 +14,6 @@
 #ifndef BREAKOUT_CONFIG_H_
 #define BREAKOUT_CONFIG_H_
 
-// Arduino loop interval
-#define LOOP_INTERVAL 200
-
 // MQTT Settings
 
 // Set to 1 to enable MQTT client logging
